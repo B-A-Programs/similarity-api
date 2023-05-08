@@ -1,7 +1,9 @@
 import '@/styles/globals.css'
 import { Inter } from 'next/font/google'
 import { cn } from '../lib/utils'
-import Providers from '@/components/ui/Providers'
+import Providers from '@/components/Providers'
+import { Toaster } from '@/components/ui/Toast'
+import Navbar from '@/components/Navbar'
 
 const inter = Inter({subsets: ['latin']})
 
@@ -14,9 +16,13 @@ export default function RootLayout({
     <html lang="en" className={cn(
       'bg-white text-slate-900 antialiased', inter.className
     )}>
-      <body className='min-h-screen bg-slate-50 dark:bg-slate-900 antialiased'>
-        <Providers>{children}
+      <body className='bg-slate-50 dark:bg-slate-900 antialiased' style={{height: '99vh'}}>
+        <Providers>
+          {children}
 
+          <Toaster position='bottom-right' />
+          
+        {/* @ts-expect-error Server Component */}
         <Navbar />
         </Providers>
 
