@@ -23,10 +23,11 @@ const Code: FC<CodeProps> = ({
   const [text, setText] = useState<string>(animated ? '' : code)
 
   useEffect(() => {
+    let intervalId: NodeJS.Timer
     if (show && animated) {
       let i = 0
-      const timer = setTimeout(() => {
-        const intervalId = setInterval(() => {
+      setTimeout(() => {
+        intervalId = setInterval(() => {
           setText(code.slice(0, i))
           i++
           if (i > code.length) {
@@ -34,11 +35,10 @@ const Code: FC<CodeProps> = ({
           }
         }, 15)
 
-        return () => clearInterval(intervalId)
-      }, animationDelay || 150)
-
-      return () => clearTimeout(timer)
+      }, animationDelay || 250)
     }
+
+    return () => clearInterval(intervalId)
   }, [code, show, animated, animationDelay])
 
   // number of lines
