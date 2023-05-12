@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { notFound } from "next/navigation"
 import { db } from "@/lib/db"
 import ApiDashboard from "@/components/ApiDashboard"
 import RequestApiKey from "@/components/RequestApiKey"
