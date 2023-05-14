@@ -13,14 +13,19 @@ export const metadata: Metadata = {
 
 const page = async () => {
     const user = await getServerSession(authOptions)
-    if(!user) return <div className="flex h-screen flex-col items-center justify-center"><LargeHeading className="three-d text-black dark:text-light-gold">Not logged in!</LargeHeading></div>
-    
+    if (!user) return <div className="flex h-screen flex-col items-center justify-center"><LargeHeading className="three-d text-black dark:text-light-gold">Not logged in!</LargeHeading></div>
+
     const apiKey = await db.apiKey.findFirst({
-        where: {userId: user.user.id, enabled: true},
+        where: { userId: user.user.id, enabled: true },
     })
 
     return <div className='max-w-7xl mx-auto mt-16'>
-        {apiKey ? <ApiDashboard /> : <RequestApiKey />}
+        {apiKey ?
+            // @ts-expect-error Server Component
+            <ApiDashboard />
+            :
+            <RequestApiKey />
+        }
     </div>
 }
 
