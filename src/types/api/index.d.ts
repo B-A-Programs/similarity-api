@@ -7,5 +7,5 @@ export interface CreateApiData {
 
 export interface RevokeApiData {
     error: string | ZodIssue[] | null
-    succes: boolean
+    success: boolean
 }
